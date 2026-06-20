@@ -123,3 +123,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'ecomm' / 'static',
 ]
+
+#media files configuration
+MEDIA_URLS = '/media/'
+MEDIA_ROOT = BASE_DIR/'media'
