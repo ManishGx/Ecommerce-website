@@ -23,8 +23,6 @@ A Django-based e-commerce platform built to learn and demonstrate backend web de
 
 ## Project Structure
 
-## Project Structure
-
 ```text
 Ecomm-Platform/
 │
