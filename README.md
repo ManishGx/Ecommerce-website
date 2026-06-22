@@ -78,7 +78,7 @@ Ecomm-Platform/
 - [x] Category model
 - [x] Product model
 - [x] Django Admin configuration
-- [ ] Product listing page
+- [x] Product listing page
 - [ ] Product detail page
 - [ ] Shopping cart
 - [ ] User authentication
