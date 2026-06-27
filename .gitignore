@@ -1,22 +1,39 @@
-#virtual environment
-env/
-
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.log
+
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Environment Variables
+.env
 
 # Django
 db.sqlite3
-
-# Static files collected by collectstatic
+db.sqlite3-journal
+media/
 staticfiles/
+local_settings.py
 
-# Environment variables
-.env
+# Testing & Coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
 
-# VS Code
+# IDEs
 .vscode/
+.idea/
 
-# OS files
+# OS Files
 .DS_Store
 Thumbs.db
+
+# Type Checking
+.mypy_cache/
+.pyre/
+.pytype/
