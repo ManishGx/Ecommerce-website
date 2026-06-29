@@ -42,6 +42,12 @@ Ecomm-Platform/
 │   ├── admin.py
 │   └── migrations/
 │
+├── carts/                    # Shopping cart
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── migrations/
+│
 ├── category/                 # Product categories
 │   ├── models.py
 │   ├── views.py
@@ -51,12 +57,17 @@ Ecomm-Platform/
 ├── store/                    # Product management
 │   ├── models.py
 │   ├── views.py
+│   ├── urls.py
 │   ├── admin.py
 │   └── migrations/
 │
 ├── templates/
 │   ├── base.html
 │   ├── home.html
+│   ├── store/
+│   │   ├── cart.html
+│   │   ├── product_details.html
+│   │   └── store.html
 │   └── includes/
 │       ├── navbar.html
 │       └── footer.html
@@ -71,7 +82,6 @@ Ecomm-Platform/
     └── photos/
 ```
 
-
 ## Current Progress
 
 - [x] Django project setup
@@ -79,8 +89,8 @@ Ecomm-Platform/
 - [x] Product model
 - [x] Django Admin configuration
 - [x] Product listing page
-- [ ] Product detail page
-- [ ] Shopping cart
+- [x] Product detail page
+- [x] Shopping cart
 - [ ] User authentication
 - [ ] Checkout system
 
@@ -92,3 +102,4 @@ cd ecomm
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+```
