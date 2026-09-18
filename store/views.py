@@ -2,33 +2,31 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product
 from category.models import Category
 from carts.views import _cart_id
-from carts.models import CartItem
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from carts.models import CartItem 
+from django.core.paginator import EmptyPage,Paginator,PageNotAnInteger
 
 # Create your views here.
-from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404, render
-
 
 def store(request, category_slug=None):
-    if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(category=category, is_available=True)
-        per_page = 1
-    else:
-        products = Product.objects.filter(is_available=True)
-        per_page = 3
+  if category_slug != None:
+    categories = get_object_or_404(Category, slug = category_slug)
+    products = Product.objects.filter(category = categories,is_available=True)
+    paginator = Paginator(products, 4)
+    page = paginator.GET.get('page')
+    paged_product = paginator.get_page(page)
+    product_count = products.count()
+  else:
+    products = Product.objects.filter(is_available=True).order_by('id')
+    paginator = Paginator(products, 4)
+    page = request.GET.get('page')
+    paged_product = paginator.get_page(page)
+    product_count = products.count()
 
-    paginator = Paginator(products, per_page)
-    page = request.GET.get("page")
-    paged_products = paginator.get_page(page)
-
-    context = {
-        "products": paged_products,
-        "product_count": products.count(),
-    }
-
-    return render(request, "store/store.html", context)
+  context = {
+    'products':paged_product,
+    'product_count':product_count,
+  }
+  return render(request, 'store/store.html', context)
 
 
 def product_details(request, category_slug, product_slug):
