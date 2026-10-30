@@ -4,7 +4,7 @@ from category.models import Category
 from carts.views import _cart_id
 from carts.models import CartItem 
 from django.core.paginator import EmptyPage,Paginator,PageNotAnInteger
-
+from django.db.models import Q
 # Create your views here.
 
 def store(request, category_slug=None):
@@ -12,7 +12,7 @@ def store(request, category_slug=None):
     categories = get_object_or_404(Category, slug = category_slug)
     products = Product.objects.filter(category = categories,is_available=True)
     paginator = Paginator(products, 4)
-    page = paginator.GET.get('page')
+    page = request.GET.get('page')
     paged_product = paginator.get_page(page)
     product_count = products.count()
   else:
@@ -42,3 +42,17 @@ def product_details(request, category_slug, product_slug):
 
     context = {"single_product": single_product, "in_cart": in_cart}
     return render(request, "store/product_details.html", context)
+
+def search(request):
+     products = Product.objects.none()
+     if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+           products = Product.objects.order_by('-created_date').filter(
+           Q(description__icontains=keyword)|
+           Q(product_name__icontains=keyword))
+     context = {
+         'products':products,
+         'product_count':products.count()
+      }     
+     return render(request, 'store/store.html', context)
